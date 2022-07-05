@@ -1,9 +1,17 @@
-# This file is a part of FileStreamBot
+# This file is a part of TG-FileStreamBot
 from WebStreamer.vars import Var
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message, CallbackQuery
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 
 class Language(object):
+    def __new__ (self, message: Message):
+        if getattr(message.from_user, 'language_code', 'Unknown') in self.available:
+            return getattr(self, getattr(message.from_user, 'language_code', self.en), self.en)
+        else:
+            return self.en
+
+    available=['en', 'Test']
+
     class en(object):
         START_TEXT = """
 <i>👋 Hᴇʏ,</i>{}\n
@@ -33,7 +41,13 @@ class Language(object):
 <b>📥 Dᴏᴡɴʟᴏᴀᴅ :</b> <i>{}</i>\n
 <b>🖥WATCH :</b> <i>{}</i>"""
 
-        ban_text="__Sᴏʀʀʏ Sɪʀ, Yᴏᴜ ᴀʀᴇ Bᴀɴɴᴇᴅ ᴛᴏ ᴜsᴇ ᴍᴇ.__\n\n**[Cᴏɴᴛᴀᴄᴛ Dᴇᴠᴇʟᴏᴘᴇʀ](tg://user?id={}) Tʜᴇʏ Wɪʟʟ Hᴇʟᴘ Yᴏᴜ**"
+    class Test(object):
+        START_TEXT = """
+<i>👋 Hᴇʏ in Russian,</i>{}\n
+<i>I'm Telegram Files Streaming Bot As Well Direct Links Generator</i>\n
+<i>Cʟɪᴄᴋ ᴏɴ Hᴇʟᴘ ᴛᴏ ɢᴇᴛ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</i>\n
+<i><u>𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u></i>\n
+<b>🔞 Pʀᴏɴ ᴄᴏɴᴛᴇɴᴛꜱ ʟᴇᴀᴅꜱ ᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛ ʙᴀɴ ʏᴏᴜ.</b>\n\n"""
 
 # ------------------------------------------------------------------------------
 
